@@ -164,12 +164,12 @@ export default function BookHomePage() {
           domain of IT. Here’s what you can expect to learn:
         </p>
 
-        <div className='space-y-12 text-lg'>
+        <div className='space-y-6 text-lg'>
           {chapters.map((ch, index) => (
-            <p key={ch.id}>
+            <p key={ch.id} className='break-words'>
               <Link
                 href={`/book/${ch.id}`}
-                className={`${cardStyle} text-blue-600 dark:bg-gray-300 hover:underline font-medium`}
+                className={`${cardStyle} text-blue-600 dark:bg-gray-300 hover:underline font-medium block w-full break-words whitespace-normal`}
               >
                 {index + 1}. {ch.title}
               </Link>
