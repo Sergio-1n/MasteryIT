@@ -1,19 +1,29 @@
 'use client';
 
-import { Menu, X, Coins } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import {
+  Home,
+  BookOpen,
+  Coins,
+  Menu,
+  X,
+  LogIn,
+  UserPlus,
+  SunMoon,
+} from 'lucide-react';
 import { ModeToggle } from './ThemeToggle';
 
 export default function Header() {
   const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,13 +33,14 @@ export default function Header() {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+    }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  // Закрытие при клике вне меню
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         isMenuOpen &&
         menuRef.current &&
@@ -40,114 +51,142 @@ export default function Header() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 dark:bg-gray-400 transition-all duration-300 ${
-        scrolled
-          ? 'bg-cyan-100/80 shadow-md backdrop-blur-md'
-          : 'bg-cyan-50/60 backdrop-blur'
-      } ${visible ? 'translate-y-0' : '-translate-y-full'}`}
-    >
-      <div className='max-w-6xl mx-auto px-4 py-3 flex items-center justify-between'>
-        {/* Logo */}
-        <Link href='/' className='flex items-center gap-2' onClick={closeMenu}>
-          <Image src='/logo.svg' alt='Logo' width={32} height={32} />
-        </Link>
-
-        {/* Desktop menu */}
-        <div className='hidden sm:flex items-center gap-4'>
-          <button
-            onClick={() => router.push('/book/select')}
-            className='flex items-center cursor-pointer  gap-2 px-3 py-1 text-sm bg-black text-white rounded hover:bg-gray-700 transition'
-          >
-            <Menu className='w-4 h-4' />
-            Chapters
-          </button>
-          <Link
-            href='/donate'
-            className='flex items-center dark:text-yellow-200 gap-1 text-sm text-yellow-600 border border-yellow-400 px-3 py-1 rounded hover:bg-yellow-100  transition'
-          >
-            <Coins className='w-4 h-4' />
-            Donate
+    <>
+      {/* Header for Desktop/Tablet */}
+      <header
+        className={`hidden sm:flex fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-cyan-100/80 shadow-md backdrop-blur-md'
+            : 'bg-cyan-50/60 backdrop-blur'
+        } ${visible ? 'translate-y-0' : '-translate-y-full'}`}
+      >
+        <div className='max-w-6xl mx-auto gap-34 py-3 flex items-center justify-between'>
+          {/* Logo */}
+          <Link href='/' className='flex items-center pr-4 gap-2'>
+            <Image src='/logo.svg' alt='Logo' width={32} height={32} />
           </Link>
-          <Link
-            href='/signin'
-            className='text-sm dark:text-gray-100 text-gray-700 hover:underline'
-          >
-            Sign In
-          </Link>
-          <Link
-            href='/signup'
-            className='text-sm text-white bg-gray-800 px-3 py-1 rounded hover:bg-black transition'
-          >
-            Sign Up
-          </Link>
-          <ModeToggle />
-        </div>
 
-        {/* Mobile burger button */}
-        <button
-          className='sm:hidden text-gray-800'
-          onClick={toggleMenu}
-          aria-label='Toggle Menu'
-        >
-          {isMenuOpen ? (
-            <X className='w-6 h-6' />
-          ) : (
-            <Menu className='w-6 h-6' />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile dropdown menu */}
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className='sm:hidden bg-white shadow-md border-t border-gray-200'
-        >
-          <div className='px-4 py-3 dark:bg-gray-700 flex flex-col gap-3'>
+          {/* Desktop menu */}
+          <div className='flex items-center gap-4'>
             <Link
-              href='/book/select'
-              onClick={closeMenu}
-              className='text-gray-800 dark:text-gray-100'
+              href='/'
+              className='flex flex-col items-center text-xs text-gray-900'
             >
-              Chapters
+              <Home className='w-6 hover:text-gray-500 h-6' />
             </Link>
+            <button
+              onClick={() => router.push('/book/select')}
+              className='flex cursor-pointer items-center gap-2 px-3 py-1 text-sm bg-black text-white rounded hover:bg-gray-700 transition'
+            >
+              <Menu className='w-4 h-4' />
+              Chapters
+            </button>
             <Link
               href='/donate'
-              onClick={closeMenu}
-              className='text-yellow-700 dark:text-gray-100'
+              className='flex items-center gap-1 text-sm text-yellow-600 dark:text-black border border-yellow-400 px-3 py-1 rounded hover:bg-yellow-100 transition'
             >
+              <Coins className='w-4 h-4' />
               Donate
             </Link>
             <Link
               href='/signin'
-              onClick={closeMenu}
-              className='text-gray-700 dark:text-gray-100'
+              className='text-sm text-gray-700 dark:text-black hover:underline'
             >
               Sign In
             </Link>
-            <ModeToggle />
             <Link
               href='/signup'
-              onClick={closeMenu}
-              className='text-white bg-gray-800 px-3 py-1 rounded text-center'
+              className='text-sm text-white bg-gray-800 px-3 py-1 rounded hover:bg-black transition'
             >
               Sign Up
             </Link>
+            <ModeToggle />
+          </div>
+        </div>
+      </header>
+
+      {/* Bottom Nav for Mobile */}
+      <nav className='sm:hidden fixed bottom-0 z-50 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex justify-around py-2'>
+        <Link
+          href='/'
+          className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
+        >
+          <Home className='w-5 h-5 mb-1' />
+          Home
+        </Link>
+        <Link
+          href='/book/select'
+          className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
+        >
+          <BookOpen className='w-5 h-5 mb-1' />
+          Chapters
+        </Link>
+        <button
+          onClick={toggleMenu}
+          className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
+        >
+          {isMenuOpen ? (
+            <X className='w-5 h-5 mb-1' />
+          ) : (
+            <Menu className='w-5 h-5 mb-1' />
+          )}
+          Menu
+        </button>
+        <Link
+          href='/donate'
+          className='flex flex-col items-center text-xs text-yellow-600 dark:text-yellow-300'
+        >
+          <Coins className='w-5 h-5 mb-1' />
+          Donate
+        </Link>
+        <ModeToggle />
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div
+          ref={menuRef}
+          className='fixed inset-0 z-40 bg-black/50 flex justify-end'
+        >
+          <div className='w-3/4 bg-white dark:bg-gray-800 p-5 space-y-4'>
+            <Link
+              href='/signin'
+              onClick={closeMenu}
+              className='flex items-center gap-2 text-gray-800 dark:text-white'
+            >
+              <LogIn className='w-5 h-5' />
+              Sign In
+            </Link>
+            <Link
+              href='/signup'
+              onClick={closeMenu}
+              className='flex items-center gap-2 text-gray-800 dark:text-white'
+            >
+              <UserPlus className='w-5 h-5' />
+              Sign Up
+            </Link>
+            <Link
+              href='/donate'
+              onClick={closeMenu}
+              className='flex items-center gap-2 text-yellow-600 dark:text-yellow-300'
+            >
+              <Coins className='w-5 h-5' />
+              Donate
+            </Link>
+            <div className='flex items-center gap-2'>
+              <SunMoon className='w-5 h-5' />
+              <ModeToggle />
+            </div>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

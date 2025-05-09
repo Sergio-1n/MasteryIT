@@ -18,7 +18,7 @@ export function ModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className='rounded-full'
+      className='rounded-full cursor-pointer'
       aria-label='Toggle Theme'
     >
       {theme === 'dark' ? (

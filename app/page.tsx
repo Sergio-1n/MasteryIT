@@ -35,7 +35,7 @@ export default function HomePage() {
 
   return (
     <main
-      className='min-h-screen bg-cover bg-center mt-4 px-4 py-12 flex flex-col items-center transition-all'
+      className='min-h-screen bg-cover bg-center px-4 py-16 flex flex-col items-center transition-all'
       style={{ backgroundImage: `url('${bgImage}')` }}
     >
       {/* <LikeBox /> */}
@@ -90,7 +90,7 @@ export default function HomePage() {
               href='https://youtube.com/@masteryit-b1h?si=Md2jBN1Z5NW8DrxV'
               target='_blank'
               rel='noopener noreferrer'
-              className='text-blue-300 underline'
+              className='dark:text-blue-300 text-blue-600 underline'
             >
               YouTube channel
             </a>{' '}

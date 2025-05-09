@@ -26,7 +26,7 @@ export default function BookHomePage() {
       style={{ backgroundImage: `url('${bgImage}')` }}
     >
       <main
-        className='max-w-3xl mt-4 mx-auto px-6 py-12 space-y-8 text-gray-800'
+        className='max-w-3xl sm:pt-16 md:pt-16 mx-auto px-6 pb-16 space-y-8 text-gray-800'
         style={{ backgroundImage: `url('${bgImage}')` }}
       >
         <h1 className='text-4xl font-bold text-center'>
