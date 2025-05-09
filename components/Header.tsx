@@ -19,7 +19,10 @@ import { ModeToggle } from './ThemeToggle';
 export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  //   const menuRef = useRef<HTMLDivElement>(null);
+
+  const menuOverlayRef = useRef<HTMLDivElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
 
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -43,15 +46,39 @@ export default function Header() {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isMenuOpen &&
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
+        menuPanelRef.current &&
+        menuOverlayRef.current &&
+        !menuPanelRef.current.contains(event.target as Node) &&
+        menuOverlayRef.current.contains(event.target as Node)
       ) {
         setIsMenuOpen(false);
       }
     };
 
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].clientX;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].clientX;
+      if (touchEndX - touchStartX > 50) {
+        // Свайп вправо
+        setIsMenuOpen(false);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -152,10 +179,15 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div
-          ref={menuRef}
+          ref={menuOverlayRef}
           className='fixed inset-0 z-40 bg-black/50 flex justify-end'
         >
-          <div className='w-3/4 bg-white dark:bg-gray-800 p-5 space-y-4'>
+          <div
+            ref={menuPanelRef}
+            className={`w-3/4 bg-white dark:bg-gray-800 p-5 space-y-4 transition-transform duration-900 transform ${
+              isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+          >
             <Link
               href='/signin'
               onClick={closeMenu}
