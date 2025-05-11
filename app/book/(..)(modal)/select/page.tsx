@@ -6,24 +6,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { chapters } from '../../../../chapters';
 import { BookOpen, ChevronDown, ChevronRight, X } from 'lucide-react';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function ChapterModal() {
-  const { theme } = useTheme();
-  const [bgImage, setBgImage] = useState('/bg.jpg');
+  // const { theme } = useTheme();
+  // const [bgImage, setBgImage] = useState('/bg.jpg');
 
-  useEffect(() => {
-    // Заменить путь на нужный тебе
-    if (theme === 'dark') {
-      setBgImage('/bg-dark.jpg');
-    } else {
-      setBgImage('/bg.jpg');
-    }
-  }, [theme]);
+  // useEffect(() => {
+  //   // Заменить путь на нужный тебе
+  //   if (theme === 'dark') {
+  //     setBgImage('/bg-dark.jpg');
+  //   } else {
+  //     setBgImage('/bg.jpg');
+  //   }
+  // }, [theme]);
 
   const cardStyle =
-    'bg-gray-200 dark:bg-gray-300 backdrop-blur shadow-xl rounded-2xl p-6 transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
+    'bg-gray-200 md:p-6 dark:bg-cyan-800 dark:text-gray-200 backdrop-blur shadow-md rounded-2xl p-4 transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
   const router = useRouter();
   const [openChapter, setOpenChapter] = useState<string | null>(null);
 
@@ -38,14 +38,14 @@ export default function ChapterModal() {
   return (
     <AnimatePresence>
       <motion.div
-        className='fixed inset-0 bg-opacity-50 flex items-center justify-center z-50'
-        style={{ backgroundImage: `url('${bgImage}')` }}
+        className='bg-cyan-100 dark:bg-cyan-900 fixed inset-0 bg-opacity-50 flex items-center justify-center z-50'
+        // style={{ backgroundImage: `url('${bgImage}')` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className='bg-gray-400/40 rounded-xl shadow-lg p-6 w-full max-w-lg space-y-4 relative max-h-[90vh] overflow-y-auto'
+          className='bg-gray-500/60 rounded-xl shadow-lg p-6 w-full max-w-lg space-y-4 relative max-h-[90vh] overflow-y-auto'
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -53,19 +53,19 @@ export default function ChapterModal() {
         >
           <button
             onClick={() => router.back()}
-            className='absolute top-4 right-4 text-gray-700 hover:text-gray-900'
+            className='absolute top-4 right-4 text-gray-200 hover:text-gray-900'
             aria-label='Закрыть'
           >
             <X size={24} />
           </button>
-          <h2 className='text-2xl text-gray-700 font-bold mb-4 text-center flex items-center justify-center gap-2'>
-            <BookOpen className='text-blue-600' /> Select a chapter
+          <h2 className='text-2xl text-gray-200 font-bold mb-4 text-center flex items-center justify-center gap-2'>
+            <BookOpen className='text-gray-100' /> Select a chapter
           </h2>{' '}
           <Link
             href='/book'
             className='text-blue-600 ml-10 rounded hover:underline block mb-4'
           >
-            <div className={`${cardStyle}dark:bg-gray-200`}>
+            <div className={`${cardStyle}`}>
               Start: Your Guide to Mastering IT
             </div>
           </Link>
@@ -78,14 +78,16 @@ export default function ChapterModal() {
                       openChapter === chapter.id ? null : chapter.id
                     )
                   }
-                  className={`${cardStyle} cursor-pointer dark:bg-gray-300 flex items-center gap-2 text-left w-full text-blue-700 hover:underline`}
+                  className={`${cardStyle} cursor-pointer flex items-center gap-2 text-left w-full text-blue-700 hover:underline`}
                 >
                   {openChapter === chapter.id ? (
                     <ChevronDown className='w-4 h-4' />
                   ) : (
                     <ChevronRight className='w-4 h-4' />
                   )}
-                  <span className='text-gray-600'>{index + 1}.</span>
+                  <span className=' text-gray-800 dark:text-gray-100'>
+                    {index + 1}.
+                  </span>
                   <BookOpen className='w-4 h-4' />
                   <span>{chapter.title}</span>
                 </div>
@@ -107,7 +109,7 @@ export default function ChapterModal() {
                                   `/book/${chapter.id}?section=${section.id}`
                                 )
                               }
-                              className='text-sm cursor-pointer text-gray-700 hover:underline w-full text-left'
+                              className='text-sm cursor-pointer text-black dark:text-white hover:underline w-full text-left'
                             >
                               {section.title}
                             </button>

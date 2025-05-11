@@ -4,25 +4,25 @@ import { notFound, useSearchParams } from 'next/navigation';
 import { chapters } from '../../../chapters';
 import Link from 'next/link';
 import { useEffect, useState, use } from 'react';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 export default function ChapterPage({
   params,
 }: {
   params: Promise<{ chapter: string }>;
 }) {
-  const { theme } = useTheme();
-  const [bgImage, setBgImage] = useState('/bg.jpg');
+  // const { theme } = useTheme();
+  // const [bgImage, setBgImage] = useState('/bg.jpg');
   const searchParams = useSearchParams();
   const sectionId = searchParams.get('section');
 
-  useEffect(() => {
-    if (theme === 'dark') {
-      setBgImage('/bg-dark.jpg');
-    } else {
-      setBgImage('/bg.jpg');
-    }
-  }, [theme]);
+  // useEffect(() => {
+  //   if (theme === 'dark') {
+  //     setBgImage('/bg-dark.jpg');
+  //   } else {
+  //     setBgImage('/bg.jpg');
+  //   }
+  // }, [theme]);
 
   useEffect(() => {
     if (sectionId) {
@@ -39,7 +39,7 @@ export default function ChapterPage({
   }, [sectionId]);
 
   const cardStyle =
-    'bg-gray-100 dark:bg-gray-300 backdrop-blur shadow-xl rounded-2xl p-4 transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
+    'bg-gray-100 dark:bg-cyan-600 dark:text-gray-200 md:p-4 p-2 backdrop-blur shadow-md rounded-xl transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
   const { chapter: chapterId } = use(params);
   const chapter = chapters.find(ch => ch.id === chapterId);
 
@@ -73,11 +73,11 @@ export default function ChapterPage({
 
   return (
     <main
-      className='min-h-screen bg-cover bg-center bg-no-repeat text-gray-900 px-4 sm:px-6 py-16'
-      style={{ backgroundImage: `url('${bgImage}')` }}
+      className='min-h-screen bg-cyan-100 dark:bg-cyan-800 text-gray-900 px-4 sm:px-4 sm:py-16 py-4'
+      // style={{ backgroundImage: `url('${bgImage}')` }}
     >
-      <div className='dark:bg-gray-700 dark:text-gray-300 max-w-3xl w-full mx-auto bg-white/90 p-6 rounded-2xl shadow-md backdrop-blur'>
-        <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center'>
+      <div className='dark:bg-black/60 dark:text-gray-200 max-w-3xl w-full mx-auto bg-white/90 p-6 rounded-2xl shadow-md backdrop-blur'>
+        <h1 className='text-xl sm:text-3xl md:text-4xl font-bold mb-6 text-center'>
           {chapter.title}
         </h1>
 

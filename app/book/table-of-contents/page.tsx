@@ -1,46 +1,46 @@
 'use client';
 
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+// import { useTheme } from 'next-themes';
+// import { useEffect, useState } from 'react';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function TableOfContentsPage() {
-  const { theme } = useTheme();
-  const [bgImage, setBgImage] = useState('/bg.jpg');
+  // const { theme } = useTheme();
+  // const [bgImage, setBgImage] = useState('/bg.jpg');
 
-  useEffect(() => {
-    // Заменить путь на нужный тебе
-    if (theme === 'dark') {
-      setBgImage('/bg-dark.jpg');
-    } else {
-      setBgImage('/bg.jpg');
-    }
-  }, [theme]);
+  // useEffect(() => {
+  //   // Заменить путь на нужный тебе
+  //   if (theme === 'dark') {
+  //     setBgImage('/bg-dark.jpg');
+  //   } else {
+  //     setBgImage('/bg.jpg');
+  //   }
+  // }, [theme]);
 
   return (
     <main
-      className='min-h-screen bg-cover bg-center mt-4 px-4 py-12 flex flex-col items-center transition-all'
-      style={{ backgroundImage: `url('${bgImage}')` }}
+      className='min-h-screen bg-cyan-100 dark:bg-cyan-800 px-4 pt-4 pb-8 sm:py-16 sm:pb-20 flex flex-col items-center transition-all'
+      // style={{ backgroundImage: `url('${bgImage}')` }}
     >
       <div
-        className='max-w-4xl mx-auto text-gray-700 bg-white rounded-2xl p-8 shadow-md'
-        style={{ backgroundImage: `url('${bgImage}')` }}
+        className='dark:bg-black/60 dark:text-gray-200 max-w-4xl mx-auto text-gray-700 bg-white rounded-2xl p-8 shadow-md'
+        // style={{ backgroundImage: `url('${bgImage}')` }}
       >
-        <h1 className='text-3xl font-bold mb-6 text-center'>
+        <h1 className='text-xl font-bold mb-6 text-center'>
           📖 What You’ll Discover
         </h1>
-        <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+        <p className='text-lg mb-6 leading-relaxed'>
           This book is organized into ten chapters, each dedicated to a specific
           domain of IT. Here’s what you can expect to learn:
         </p>
 
-        <div className='space-y-6 text-gray-800 text-md leading-relaxed'>
+        <div className='space-y-6 text-md leading-relaxed'>
           <div>
             <h2 className='font-bold text-xl mb-1'>
               Chapter 1: Introduction to IT
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Explore the industry’s landscape, understand key IT department
               functions, and discover the essential soft and hard skills for
               success.
@@ -55,7 +55,7 @@ export default function TableOfContentsPage() {
 
           <div>
             <h2 className='font-bold text-xl mb-1'>Chapter 2: Programmers</h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Gain a solid foundation in programming basics, explore major
               computer languages, and dive into the world of frontend and
               backend development.
@@ -70,7 +70,7 @@ export default function TableOfContentsPage() {
 
           <div>
             <h2 className='font-bold text-xl mb-1'>Chapter 3: Web Designers</h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Learn the principles of UI/UX design, modern tools and techniques,
               and the importance of responsive, accessible, and user-tested
               designs.
@@ -86,7 +86,7 @@ export default function TableOfContentsPage() {
 
           <div>
             <h2 className='font-bold text-xl mb-1'>Chapter 4: Testers</h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Understand various types of testing, from manual to automated, and
               learn how to ensure quality assurance through effective bug
               tracking and communication with developers.
@@ -104,7 +104,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 5: Data Analytics & Digital Marketing
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Discover the strategic value of business analysis, explore various
               types of analytics and their applications, and learn how to
               integrate data-driven insights into product development.
@@ -128,7 +128,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 6: Project Management
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Master methodologies like Scrum, Kanban, and Waterfall while
               learning to manage project lifecycles, MVPs, and Agile sprints
               effectively.
@@ -146,7 +146,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 7: IT Recruitment
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Discover strategies for excelling in IT recruitment, build a
               strong recruiting vocabulary, and learn quick tips for identifying
               and aligning top talent.
@@ -163,7 +163,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 8: Deadlines & Software Updates
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Understand the art of managing deadlines, structuring updates, and
               presenting software changes professionally to stakeholders.
             </p>
@@ -179,7 +179,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 9: Stand-up Meetings
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Get practical advice on organizing, running, and reporting
               stand-up meetings, a cornerstone of collaborative IT workflows.
             </p>
@@ -195,7 +195,7 @@ export default function TableOfContentsPage() {
             <h2 className='font-bold text-xl mb-1'>
               Chapter 10: Interaction & Communication
             </h2>
-            <p className='text-gray-700 text-lg mb-6 leading-relaxed'>
+            <p className='text-lg mb-6 leading-relaxed'>
               Learn how to provide constructive feedback, handle client requests
               with professionalism, and turn challenging interactions into
               positive relationships.

@@ -1,22 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+// import { useTheme } from 'next-themes';
+import { useState } from 'react';
 
 export default function DonatePage() {
-  const { theme } = useTheme();
-  const [bgImage, setBgImage] = useState('/bg.jpg');
+  // const { theme } = useTheme();
+  // const [bgImage, setBgImage] = useState('/bg.jpg');
   const walletAddress = 'TRTdpuB99omSyPihhgbRMgtZgmokWu1DKu';
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (theme === 'dark') {
-      setBgImage('/bg-dark.jpg');
-    } else {
-      setBgImage('/bg.jpg');
-    }
-  }, [theme]);
+  // useEffect(() => {
+  //   if (theme === 'dark') {
+  //     setBgImage('/bg-dark.jpg');
+  //   } else {
+  //     setBgImage('/bg.jpg');
+  //   }
+  // }, [theme]);
 
   const handleCopy = async () => {
     try {
@@ -30,22 +30,18 @@ export default function DonatePage() {
 
   return (
     <main
-      className='min-h-screen bg-gradient-to-b from-gray-100 to-white px-4 py-16 flex items-center justify-center'
-      style={{ backgroundImage: `url('${bgImage}')` }}
+      className='min-h-screen dark:bg-cyan-800 from-gray-100 to-white px-4 py-16 flex items-center justify-center'
+      // style={{ backgroundImage: `url('${bgImage}')` }}
     >
-      <div className='max-w-xl w-full dark:bg-cyan-100/40 bg-cyan-100/80 rounded-2xl shadow-xl p-8 text-center'>
-        <h1 className='text-3xl text-gray-600 font-bold mb-4'>
-          Support my project 💖
-        </h1>
-        <p className='text-lg text-gray-700 mb-6 leading-relaxed'>
+      <div className='max-w-xl w-full dark:bg-black/60 bg-cyan-100/80 rounded-2xl shadow-xl p-8 text-center'>
+        <h1 className='text-3xl font-bold mb-4'>Support my project 💖</h1>
+        <p className='text-lg mb-6 leading-relaxed'>
           If you like what I do and you want to help the development of the
           project, you can donate in USDT (TRC-20).
         </p>
 
         <div className='mb-6'>
-          <p className='text-md font-medium text-gray-600 mb-2'>
-            USDT (TRC-20) wallet:
-          </p>
+          <p className='text-md font-medium mb-2'>USDT (TRC-20) wallet:</p>
           <div className='relative'>
             <div className='bg-gray-100 dark:bg-gray-200 p-4 text-gray-800 rounded-lg text-sm break-all border border-gray-300 pr-10'>
               {walletAddress}
@@ -89,7 +85,7 @@ export default function DonatePage() {
           />
         </div>
 
-        <p className='text-gray-500 text-sm'>
+        <p className='text-sm'>
           Scan the QR code or copy the address to send the donation.
         </p>
       </div>

@@ -88,8 +88,8 @@ export default function Header() {
       <header
         className={`hidden sm:flex fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-cyan-100/80 shadow-md backdrop-blur-md'
-            : 'bg-cyan-50/60 backdrop-blur'
+            ? 'bg-cyan-600/60 shadow-md backdrop-blur-md'
+            : 'bg-cyan-300/60 dark:bg-cyan-600/60 backdrop-blur'
         } ${visible ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className='max-w-6xl mx-auto gap-34 py-3 flex items-center justify-between'>
@@ -148,7 +148,7 @@ export default function Header() {
       </header>
 
       {/* Bottom Nav for Mobile */}
-      <nav className='sm:hidden fixed bottom-0 z-50 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex justify-around py-2'>
+      <nav className='sm:hidden fixed bottom-0 z-50 w-full bg-white dark:bg-cyan-900 border-t border-gray-200 dark:border-gray-700 flex justify-around py-2'>
         <Link
           href='/'
           className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
