@@ -73,7 +73,7 @@ export default function ChapterPage({
 
   return (
     <main
-      className='min-h-screen bg-cyan-100 dark:bg-cyan-800 text-gray-900 px-4 sm:px-4 sm:py-16 py-4'
+      className='min-h-screen bg-cyan-100 dark:bg-cyan-800 text-gray-900 px-4 sm:px-4 sm:py-16 pb-18 pt-4'
       // style={{ backgroundImage: `url('${bgImage}')` }}
     >
       <div className='dark:bg-black/60 dark:text-gray-200 max-w-3xl w-full mx-auto bg-white/90 p-6 rounded-2xl shadow-md backdrop-blur'>
