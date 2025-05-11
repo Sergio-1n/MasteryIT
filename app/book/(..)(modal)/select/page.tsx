@@ -7,6 +7,7 @@ import { chapters } from '../../../../chapters';
 import { BookOpen, ChevronDown, ChevronRight, X } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function ChapterModal() {
   const { theme } = useTheme();
@@ -99,16 +100,28 @@ export default function ChapterModal() {
                     >
                       {chapter.sections.map(section => (
                         <li key={section.id}>
-                          <button
-                            onClick={() =>
-                              router.push(
-                                `/book/${chapter.id}?section=${section.id}`
-                              )
-                            }
-                            className='text-sm cursor-pointer text-gray-700 hover:underline w-full text-left'
-                          >
-                            {section.title}
-                          </button>
+                          <SignedIn>
+                            <button
+                              onClick={() =>
+                                router.push(
+                                  `/book/${chapter.id}?section=${section.id}`
+                                )
+                              }
+                              className='text-sm cursor-pointer text-gray-700 hover:underline w-full text-left'
+                            >
+                              {section.title}
+                            </button>
+                          </SignedIn>
+
+                          <SignedOut>
+                            <SignInButton
+                              forceRedirectUrl={`/book/${chapter.id}?section=${section.id}`}
+                            >
+                              <button className='text-sm cursor-pointer text-gray-700 hover:underline w-full text-left'>
+                                {section.title}
+                              </button>
+                            </SignInButton>
+                          </SignedOut>
                         </li>
                       ))}
                     </motion.ul>

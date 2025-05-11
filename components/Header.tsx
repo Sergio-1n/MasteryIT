@@ -4,17 +4,15 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import {
-  Home,
-  BookOpen,
-  Coins,
-  Menu,
-  X,
-  LogIn,
-  UserPlus,
-  SunMoon,
-} from 'lucide-react';
+import { Home, BookOpen, Coins, Menu, X, LogIn, SunMoon } from 'lucide-react';
 import { ModeToggle } from './ThemeToggle';
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs';
 
 export default function Header() {
   const router = useRouter();
@@ -122,18 +120,28 @@ export default function Header() {
               <Coins className='w-4 h-4' />
               Donate
             </Link>
-            <Link
-              href='/signin'
-              className='text-sm text-gray-700 dark:text-black hover:underline'
-            >
-              Sign In
-            </Link>
-            <Link
-              href='/signup'
-              className='text-sm text-white bg-gray-800 px-3 py-1 rounded hover:bg-black transition'
-            >
-              Sign Up
-            </Link>
+            <SignedOut>
+              <div className='flex gap-2'>
+                <SignInButton>
+                  <button className='flex items-center cursor-pointer gap-1 text-sm bg-gray-800 text-white px-3 py-1 rounded hover:bg-black transition'>
+                    <LogIn className='w-4 h-4' />
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton>
+                  <button className='text-sm text-white  cursor-pointer bg-gray-800 px-3 py-1 rounded hover:bg-black transition'>
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
+
+            <SignedIn>
+              <div className='flex items-center'>
+                <UserButton />
+              </div>
+            </SignedIn>
+
             <ModeToggle />
           </div>
         </div>
@@ -157,7 +165,7 @@ export default function Header() {
         </Link>
         <button
           onClick={toggleMenu}
-          className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
+          className='flex flex-col cursor-pointer items-center text-xs text-gray-700 dark:text-gray-200'
         >
           {isMenuOpen ? (
             <X className='w-5 h-5 mb-1' />
@@ -188,22 +196,27 @@ export default function Header() {
               isMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
           >
-            <Link
-              href='/signin'
-              onClick={closeMenu}
-              className='flex items-center gap-2 text-gray-800 dark:text-white'
-            >
-              <LogIn className='w-5 h-5' />
-              Sign In
-            </Link>
-            <Link
-              href='/signup'
-              onClick={closeMenu}
-              className='flex items-center gap-2 text-gray-800 dark:text-white'
-            >
-              <UserPlus className='w-5 h-5' />
-              Sign Up
-            </Link>
+            <SignedOut>
+              <div className='flex flex-col gap-2 items-start'>
+                <SignInButton>
+                  <button className='flex items-center cursor-pointer gap-1 text-sm bg-gray-800 text-white px-4 py-1.5 rounded hover:bg-black transition'>
+                    <LogIn className='w-4 h-4' />
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton>
+                  <button className='flex items-center cursor-pointer gap-1 text-sm bg-gray-800 text-white px-4 py-1.5 rounded hover:bg-black transition'>
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
+
+            <SignedIn>
+              <div className='flex items-center'>
+                <UserButton />
+              </div>
+            </SignedIn>
             <Link
               href='/donate'
               onClick={closeMenu}

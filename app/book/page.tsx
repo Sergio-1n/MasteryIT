@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { chapters } from '../../chapters';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function BookHomePage() {
   const { theme } = useTheme();
@@ -167,12 +168,24 @@ export default function BookHomePage() {
         <div className='space-y-6 text-lg'>
           {chapters.map((ch, index) => (
             <p key={ch.id} className='break-words'>
-              <Link
-                href={`/book/${ch.id}`}
-                className={`${cardStyle} text-blue-600 dark:bg-gray-300 hover:underline font-medium block w-full break-words whitespace-normal`}
-              >
-                {index + 1}. {ch.title}
-              </Link>
+              <SignedIn>
+                <Link
+                  href={`/book/${ch.id}`}
+                  className={`${cardStyle} text-blue-600 dark:bg-gray-300 hover:underline font-medium block w-full break-words whitespace-normal`}
+                >
+                  {index + 1}. {ch.title}
+                </Link>
+              </SignedIn>
+
+              <SignedOut>
+                <SignInButton forceRedirectUrl={`/book/${ch.id}`}>
+                  <button
+                    className={`${cardStyle} text-blue-600 cursor-pointer dark:bg-gray-300 hover:underline font-medium block w-full break-words whitespace-normal text-left`}
+                  >
+                    {index + 1}. {ch.title} (Sign in to read)
+                  </button>
+                </SignInButton>
+              </SignedOut>
             </p>
           ))}
         </div>
@@ -208,26 +221,50 @@ export default function BookHomePage() {
           Are you ready to embrace the opportunities of IT? Let’s begin this
           exciting journey together!
         </p>
-        <Link
-          className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
-          href='/book/introduction'
-        >
-          Start Reading
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-5 h-5'
+        <SignedIn>
+          <Link
+            className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
+            href='/book/introduction'
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
-            />
-          </svg>
-        </Link>
+            Start Reading
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-5 h-5'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
+              />
+            </svg>
+          </Link>
+        </SignedIn>
+
+        <SignedOut>
+          <SignInButton mode='redirect' forceRedirectUrl='/book/introduction'>
+            <button className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'>
+              Start Reading
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='w-5 h-5'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
+                />
+              </svg>
+            </button>
+          </SignInButton>
+        </SignedOut>
       </main>
     </div>
   );

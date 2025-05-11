@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function TableOfContentsPage() {
   const { theme } = useTheme();
@@ -206,26 +207,50 @@ export default function TableOfContentsPage() {
               <li>10.4 Turning Negatives into Positives</li>
             </ul>
           </div>
-          <Link
-            className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
-            href='/book/introduction'
-          >
-            Start Reading
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth={1.5}
-              stroke='currentColor'
-              className='w-5 h-5'
+          <SignedIn>
+            <Link
+              className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
+              href='/book/introduction'
             >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
-              />
-            </svg>
-          </Link>
+              Start Reading
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='w-5 h-5'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
+                />
+              </svg>
+            </Link>
+          </SignedIn>
+
+          <SignedOut>
+            <SignInButton mode='redirect' forceRedirectUrl='/book/introduction'>
+              <button className='inline-flex cursor-pointer items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'>
+                Start Reading
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={1.5}
+                  stroke='currentColor'
+                  className='w-5 h-5'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3'
+                  />
+                </svg>
+              </button>
+            </SignInButton>
+          </SignedOut>
         </div>
       </div>
     </main>
