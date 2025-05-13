@@ -30,10 +30,10 @@ export default function DonatePage() {
 
   return (
     <main
-      className='min-h-screen dark:bg-cyan-800 from-gray-100 to-white px-4 py-16 flex items-center justify-center'
+      className='sm:py-16 min-h-screen dark:bg-cyan-800 from-gray-100 to-white px-4 py-4 flex items-center justify-center'
       // style={{ backgroundImage: `url('${bgImage}')` }}
     >
-      <div className='max-w-xl w-full dark:bg-black/60 bg-cyan-100/80 rounded-2xl shadow-xl p-8 text-center'>
+      <div className='max-w-xl w-full dark:bg-black/60 bg-white rounded-2xl shadow-xl p-8 text-center'>
         <h1 className='text-3xl font-bold mb-4'>Support my project 💖</h1>
         <p className='text-lg mb-6 leading-relaxed'>
           If you like what I do and you want to help the development of the

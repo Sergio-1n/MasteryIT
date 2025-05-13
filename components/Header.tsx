@@ -88,8 +88,8 @@ export default function Header() {
       <header
         className={`hidden sm:flex fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-cyan-600/60 shadow-md backdrop-blur-md'
-            : 'bg-cyan-300/60 dark:bg-cyan-600/60 backdrop-blur'
+            ? 'bg-cyan-200/60 shadow-md backdrop-blur-md'
+            : 'bg-cyan-200/60 dark:bg-cyan-600/60 backdrop-blur'
         } ${visible ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className='max-w-6xl mx-auto gap-34 py-3 flex items-center justify-between'>
@@ -104,7 +104,7 @@ export default function Header() {
               href='/'
               className='flex flex-col items-center text-xs text-gray-900'
             >
-              <Home className='w-6 hover:text-gray-500 h-6' />
+              <Home className='w-6 hover:text-white h-6' />
             </Link>
             <button
               onClick={() => router.push('/book/select')}
@@ -115,7 +115,7 @@ export default function Header() {
             </button>
             <Link
               href='/donate'
-              className='flex items-center gap-1 text-sm text-yellow-600 dark:text-black border border-yellow-400 px-3 py-1 rounded hover:bg-yellow-100 transition'
+              className='flex cursor-pointer items-center gap-2 px-3 py-1 text-sm bg-black text-white rounded hover:bg-gray-700 transition'
             >
               <Coins className='w-4 h-4' />
               Donate
@@ -148,7 +148,7 @@ export default function Header() {
       </header>
 
       {/* Bottom Nav for Mobile */}
-      <nav className='sm:hidden fixed bottom-0 z-50 w-full bg-white dark:bg-cyan-900 border-t border-gray-200 dark:border-gray-700 flex justify-around py-2'>
+      <nav className='sm:hidden fixed bottom-0 z-50 w-full bg-cyan-100/90 dark:bg-cyan-900/90 border-t border-gray-200 dark:border-gray-700 flex justify-around py-2'>
         <Link
           href='/'
           className='flex flex-col items-center text-xs text-gray-700 dark:text-gray-200'
@@ -174,10 +174,7 @@ export default function Header() {
           )}
           Menu
         </button>
-        <Link
-          href='/donate'
-          className='flex flex-col items-center text-xs text-yellow-600 dark:text-yellow-300'
-        >
+        <Link href='/donate' className='flex flex-col items-center text-xs'>
           <Coins className='w-5 h-5 mb-1' />
           Donate
         </Link>

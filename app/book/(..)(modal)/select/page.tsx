@@ -6,24 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { chapters } from '../../../../chapters';
 import { BookOpen, ChevronDown, ChevronRight, X } from 'lucide-react';
 import Link from 'next/link';
-// import { useTheme } from 'next-themes';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function ChapterModal() {
-  // const { theme } = useTheme();
-  // const [bgImage, setBgImage] = useState('/bg.jpg');
-
-  // useEffect(() => {
-  //   // Заменить путь на нужный тебе
-  //   if (theme === 'dark') {
-  //     setBgImage('/bg-dark.jpg');
-  //   } else {
-  //     setBgImage('/bg.jpg');
-  //   }
-  // }, [theme]);
-
-  const cardStyle =
-    'bg-gray-200 md:p-6 dark:bg-cyan-800 dark:text-gray-200 backdrop-blur shadow-md rounded-2xl p-4 transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
   const router = useRouter();
   const [openChapter, setOpenChapter] = useState<string | null>(null);
 
@@ -39,13 +24,12 @@ export default function ChapterModal() {
     <AnimatePresence>
       <motion.div
         className='bg-cyan-100 dark:bg-cyan-900 fixed inset-0 bg-opacity-50 flex items-center justify-center z-50'
-        // style={{ backgroundImage: `url('${bgImage}')` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className='bg-gray-500/60 rounded-xl shadow-lg p-6 w-full max-w-lg space-y-4 relative max-h-[90vh] overflow-y-auto'
+          className='bg-white dark:bg-cyan-700 rounded-xl shadow-lg p-6 w-full max-w-lg space-y-4 relative max-h-[90vh] overflow-y-auto'
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -53,23 +37,19 @@ export default function ChapterModal() {
         >
           <button
             onClick={() => router.back()}
-            className='absolute top-4 right-4 text-gray-200 hover:text-gray-900'
-            aria-label='Закрыть'
+            className='absolute top-4 right-4 text-gray-700 dark:text-gray-200 hover:text-gray-900'
+            aria-label='close'
           >
             <X size={24} />
           </button>
-          <h2 className='text-2xl text-gray-200 font-bold mb-4 text-center flex items-center justify-center gap-2'>
-            <BookOpen className='text-gray-100' /> Select a chapter
+          <h2 className='text-gray-800 dark:text-gray-200 font-bold mb-4 text-center flex items-center justify-center gap-2'>
+            <BookOpen className='text-gray-800 dark:text-gray-200' /> Select a
+            chapter
           </h2>{' '}
-          <Link
-            href='/book'
-            className='text-blue-600 ml-10 rounded hover:underline block mb-4'
-          >
-            <div className={`${cardStyle}`}>
-              Start: Your Guide to Mastering IT
-            </div>
-          </Link>
-          <ul className='space-y-3'>
+          <div className='card'>
+            <Link href='/book'>Start: Your Guide to Mastering IT</Link>
+          </div>
+          <ul>
             {chapters.map((chapter, index) => (
               <li key={chapter.id}>
                 <div
@@ -78,7 +58,7 @@ export default function ChapterModal() {
                       openChapter === chapter.id ? null : chapter.id
                     )
                   }
-                  className={`${cardStyle} cursor-pointer flex items-center gap-2 text-left w-full text-blue-700 hover:underline`}
+                  className='card flex items-center cursor-pointer gap-2'
                 >
                   {openChapter === chapter.id ? (
                     <ChevronDown className='w-4 h-4' />
@@ -119,7 +99,7 @@ export default function ChapterModal() {
                             <SignInButton
                               forceRedirectUrl={`/book/${chapter.id}?section=${section.id}`}
                             >
-                              <button className='text-sm cursor-pointer text-gray-700 hover:underline w-full text-left'>
+                              <button className='text-sm cursor-pointer text-gray-700 dark:text-gray-100 hover:underline w-full text-left'>
                                 {section.title}
                               </button>
                             </SignInButton>
@@ -134,7 +114,7 @@ export default function ChapterModal() {
           </ul>
           <button
             onClick={() => router.back()}
-            className='mt-6 w-full bg-black cursor-pointer text-white hover:text-white py-2 rounded hover:bg-gray-800'
+            className='cta-button justify-end'
           >
             Close
           </button>

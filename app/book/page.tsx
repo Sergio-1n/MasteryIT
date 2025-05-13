@@ -1,49 +1,25 @@
 'use client';
-// app/book/page.tsx
+
 import Link from 'next/link';
 import { chapters } from '../../chapters';
-// import { useTheme } from 'next-themes';
-// import { useEffect, useState } from 'react';
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function BookHomePage() {
-  // const { theme } = useTheme();
-  // const [bgImage, setBgImage] = useState('/bg.jpg');
-
-  // useEffect(() => {
-  //   // Заменить путь на нужный тебе
-  //   if (theme === 'dark') {
-  //     setBgImage('/bg-dark.jpg');
-  //   } else {
-  //     setBgImage('/bg.jpg');
-  //   }
-  // }, [theme]);
-
-  const cardStyle =
-    'bg-white/80 backdrop-blur text-sm md:text-xl shadow-md mt-4 rounded-2xl md:p-6 p-4 transition hover:shadow-cyan-200 hover:scale-[1.02] duration-200';
   return (
-    <div
-      className='min-h-screen bg-cyan-200 dark:bg-cyan-800'
-      // style={{ backgroundImage: `url('${bgImage}')` }}
-    >
-      <main
-        className='max-w-3xl sm:pt-16 py-4 dark:text-gray-100 md:pt-16 mx-auto px-6 pb-16 space-y-8 text-gray-800'
-        // style={{ backgroundImage: `url('${bgImage}')` }}
-      >
+    <div className='max-w-4xl w-full space-y-4'>
+      <main className='max-w-3xl sm:pt-16 py-4 dark:text-gray-100 md:pt-16 mx-auto px-6 pb-16 space-y-8 text-gray-800'>
         <div className='bg-white/80 text-left md:text-xl dark:bg-black/60 backdrop-blur shadow-xl rounded-2xl p-6'>
-          <h1 className='text-xl md:text-2xl font-bold text-center'>
+          <h1>
             &quot;The Future of IT: Transforming Knowledge into Career
             Success&quot;
           </h1>
-          <h1 className='text-xl md:text-2xl pt-4 font-bold text-center'>
+          <h1>
             Dive into the World of IT: Discover Key Roles, Skills, and
             Essentials Shaping the Tech Industry Today.
           </h1>
-          <h1 className='text-xl md:text-2xl pt-4 font-bold text-center'>
-            Your Guide to Mastering IT
-          </h1>
+          <h1>Your Guide to Mastering IT</h1>
 
-          <p className='pt-4 leading-relaxed'>
+          <p>
             The IT industry is a rapidly evolving domain that influences every
             facet of modern life and fuels global innovation. Whether you’re an
             aspiring professional stepping into the tech world or a seasoned
@@ -51,7 +27,7 @@ export default function BookHomePage() {
             and mastering the diverse landscape of information technology.
           </p>
 
-          <p className='pt-4 leading-relaxed'>
+          <p>
             This guide aims to illuminate the foundational principles, essential
             roles, and advanced methodologies of IT, offering practical
             knowledge that bridges the gap between understanding and
@@ -61,11 +37,9 @@ export default function BookHomePage() {
             experience level.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            Why This Book Is Essential for Your IT Journey
-          </h2>
+          <h2>Why This Book Is Essential for Your IT Journey</h2>
 
-          <p className='pt-4 leading-relaxed'>
+          <p>
             Mastering the knowledge and skills outlined in this guide can
             significantly enhance your performance during job interviews.
             Understanding the IT industry and its key functions equips you to
@@ -75,7 +49,7 @@ export default function BookHomePage() {
             expertise and provide concrete examples of your capabilities.
           </p>
 
-          <p className='pt-4 leading-relaxed'>
+          <p>
             Additionally, insights into project management methodologies and
             analytics showcase your ability to contribute to strategic
             initiatives. Soft skills like effective communication, client
@@ -86,11 +60,9 @@ export default function BookHomePage() {
             impression on potential employers.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            Empowering Your Communication
-          </h2>
+          <h2>Empowering Your Communication</h2>
 
-          <p className='py-4 leading-relaxed'>
+          <p>
             One of the standout features of this book is its focus on IT
             terminology. Fluency in the technical language of IT is not just a
             skill—it’s an essential tool for professional success. With clear,
@@ -98,34 +70,29 @@ export default function BookHomePage() {
             ensures you can confidently navigate the jargon-filled world of IT.
           </p>
 
-          <p
-            className={`${cardStyle} text-center dark:bg-cyan-800 leading-relaxed`}
-          >
+          <p className='card mt-4'>
             To make your learning experience even more effective, each term
             comes with a pronunciation guide from a native speaker, accessible
-            on our dedicated YouTube channel:
-            <br />
+            on our dedicated YouTube channel:&nbsp;
             <a
               href='https://www.youtube.com/channel/UC2LaYmQzafDXo4ZTPeILfYg'
-              className='text-blue-200 underline'
+              className='underline'
               target='_blank'
             >
               https://www.youtube.com
             </a>
           </p>
 
-          <p className='leading-relaxed pt-6'>
+          <p>
             Beyond definitions, we bring these terms to life with real-world
             dialogue examples. Whether in team discussions, client interactions,
             or professional emails, you’ll learn not only what these terms mean
             but also how and when to use them effectively.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            Motivation: A Rewarding Journey Ahead
-          </h2>
+          <h2>Motivation: A Rewarding Journey Ahead</h2>
 
-          <p className='leading-relaxed pt-4'>
+          <p>
             Learning IT and mastering its terminology is no small task, but the
             rewards are immeasurable. This book recognizes the challenges and
             offers structured guidance to ensure your efforts pay off. Whether
@@ -134,7 +101,7 @@ export default function BookHomePage() {
             success.
           </p>
 
-          <p className='leading-relaxed pt-4'>
+          <p>
             By committing to this journey, you’re investing in a skill set that
             unlocks doors to innovation, collaboration, and growth. The IT
             industry rewards those who embrace its intricacies, and this guide
@@ -142,11 +109,9 @@ export default function BookHomePage() {
             clarity.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            Who Is This Book For?
-          </h2>
+          <h2>Who Is This Book For?</h2>
 
-          <ul className='list-disc pt-4 list-inside text-lg leading-relaxed space-y-1'>
+          <ul>
             <li>A beginner eager to explore the opportunities in IT,</li>
             <li>
               A programmer, web designer, tester, or analyst deepening your
@@ -156,38 +121,31 @@ export default function BookHomePage() {
             <li>A project manager mastering workflows and deadlines,</li>
           </ul>
 
-          <p className='leading-relaxed pt-4'>
+          <p>
             This book offers tailored insights for everyone. It serves as a
             bridge between theory and practice, helping you understand not just
             the what but the how of IT’s multifaceted ecosystem.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            What You’ll Discover
-          </h2>
+          <h2>What You’ll Discover</h2>
 
-          <p className='leading-relaxed pt-4'>
+          <p className='mb-4'>
             This book is organized into ten chapters, each dedicated to a
             specific domain of IT. Here’s what you can expect to learn:
           </p>
 
           <div className='space-y-6 text-lg'>
             {chapters.map((ch, index) => (
-              <p key={ch.id} className='break-words'>
+              <p key={ch.id} className='card dark:text-gray-100 break-words'>
                 <SignedIn>
-                  <Link
-                    href={`/book/${ch.id}`}
-                    className={`${cardStyle} text-blue-600 dark:bg-cyan-800 dark:text-gray-100 hover:underline font-medium block w-full break-words whitespace-normal`}
-                  >
+                  <Link href={`/book/${ch.id}`} className='w-5 h-5'>
                     {index + 1}. {ch.title}
                   </Link>
                 </SignedIn>
 
                 <SignedOut>
                   <SignInButton forceRedirectUrl={`/book/${ch.id}`}>
-                    <button
-                      className={`${cardStyle} text-blue-600 cursor-pointer dark:bg-gray-300 hover:underline font-medium block w-full break-words whitespace-normal text-left`}
-                    >
+                    <button className='.cta-button'>
                       {index + 1}. {ch.title} (Sign in to read)
                     </button>
                   </SignInButton>
@@ -196,43 +154,36 @@ export default function BookHomePage() {
             ))}
           </div>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            A Unique Resource for IT Professionals
-          </h2>
+          <h2>A Unique Resource for IT Professionals</h2>
 
-          <p className='leading-relaxed pt-4'>
+          <p>
             This book doesn’t just teach—it transforms your understanding of IT.
             By the end, you’ll have mastered not only technical concepts but
             also the art of collaboration, communication, and execution in the
             fast-paced IT world.
           </p>
 
-          <p className='leading-relaxed'>
+          <p>
             From understanding team dynamics in stand-up meetings to navigating
             client relationships with finesse, every chapter is crafted to
             ensure you’re equipped for real-world challenges.
           </p>
 
-          <h2 className='text-xl md:text-2xl font-semibold mt-10'>
-            Embark on Your IT Journey
-          </h2>
+          <h2>Embark on Your IT Journey</h2>
 
-          <p className='pt-4 leading-relaxed'>
+          <p>
             As you progress through this guide, you’ll gain not just knowledge
             but the confidence to apply it. Whether you aim to code, design,
             test, or manage, this book provides a roadmap for growth and
             excellence.
           </p>
 
-          <p className='py-4 leading-relaxed font-semibold'>
+          <p className='mb-4'>
             Are you ready to embrace the opportunities of IT? Let’s begin this
             exciting journey together!
           </p>
           <SignedIn>
-            <Link
-              className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
-              href='/book/introduction'
-            >
+            <Link className='cta-button' href='/book/introduction'>
               Start Reading
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -253,7 +204,7 @@ export default function BookHomePage() {
 
           <SignedOut>
             <SignInButton mode='redirect' forceRedirectUrl='/book/introduction'>
-              <button className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'>
+              <button className='cta-button'>
                 Start Reading
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
