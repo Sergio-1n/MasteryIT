@@ -22,7 +22,7 @@ export function ModeToggle() {
       aria-label='Toggle Theme'
     >
       {theme === 'dark' ? (
-        <FaSun className='h-5 w-5 text-yellow-500' />
+        <FaSun className='h-5 w-5 text-white' />
       ) : (
         <FaMoon className='h-5 w-5 text-gray-800' />
       )}
