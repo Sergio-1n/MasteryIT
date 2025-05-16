@@ -4,7 +4,16 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { Home, BookOpen, Coins, Menu, X, LogIn, SunMoon } from 'lucide-react';
+import {
+  Home,
+  BookOpen,
+  Coins,
+  Menu,
+  X,
+  LogIn,
+  SunMoon,
+  Phone,
+} from 'lucide-react';
 import { ModeToggle } from './ThemeToggle';
 import {
   SignInButton,
@@ -13,18 +22,20 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs';
+import { FaInstagram, FaLinkedin, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  //   const menuRef = useRef<HTMLDivElement>(null);
-
   const menuOverlayRef = useRef<HTMLDivElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
 
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const [showContacts, setShowContacts] = useState(false);
+  const contactsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +74,6 @@ export default function Header() {
     const handleTouchEnd = (e: TouchEvent) => {
       touchEndX = e.changedTouches[0].clientX;
       if (touchEndX - touchStartX > 50) {
-        // Свайп вправо
         setIsMenuOpen(false);
       }
     };
@@ -79,6 +89,21 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleClickOutsideModal = (event: MouseEvent) => {
+      if (
+        showContacts &&
+        contactsRef.current &&
+        !contactsRef.current.contains(event.target as Node)
+      ) {
+        setShowContacts(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutsideModal);
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutsideModal);
+  }, [showContacts]);
+
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -93,12 +118,10 @@ export default function Header() {
         } ${visible ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className='max-w-6xl mx-auto gap-34 py-3 flex items-center justify-between'>
-          {/* Logo */}
           <Link href='/' className='flex items-center pr-4 gap-2'>
             <Image src='/logo.svg' alt='Logo' width={32} height={32} />
           </Link>
 
-          {/* Desktop menu */}
           <div className='flex items-center gap-4'>
             <Link
               href='/'
@@ -120,6 +143,12 @@ export default function Header() {
               <Coins className='w-4 h-4' />
               Donate
             </Link>
+            <button
+              onClick={() => setShowContacts(true)}
+              className='flex items-center cursor-pointer gap-2 text-gray-700 dark:text-gray-900 hover:text-gray-100 dark:hover:text-gray-100 transition'
+            >
+              <Phone className='w-5 h-5' />
+            </button>
             <SignedOut>
               <div className='flex gap-2'>
                 <SignInButton>
@@ -129,19 +158,15 @@ export default function Header() {
                   </button>
                 </SignInButton>
                 <SignUpButton>
-                  <button className='text-sm text-white  cursor-pointer bg-gray-800 px-3 py-1 rounded hover:bg-black transition'>
+                  <button className='text-sm text-white cursor-pointer bg-gray-800 px-3 py-1 rounded hover:bg-black transition'>
                     Sign Up
                   </button>
                 </SignUpButton>
               </div>
             </SignedOut>
-
             <SignedIn>
-              <div className='flex items-center'>
-                <UserButton />
-              </div>
+              <UserButton />
             </SignedIn>
-
             <ModeToggle />
           </div>
         </div>
@@ -208,24 +233,91 @@ export default function Header() {
                 </SignUpButton>
               </div>
             </SignedOut>
-
             <SignedIn>
-              <div className='flex items-center'>
-                <UserButton />
-              </div>
+              <UserButton />
             </SignedIn>
             <Link
               href='/donate'
               onClick={closeMenu}
-              className='flex items-center gap-2 text-yellow-600 dark:text-yellow-300'
+              className='flex items-center gap-2 text-gray-700 dark:text-gray-100'
             >
               <Coins className='w-5 h-5' />
               Donate
             </Link>
+            <button
+              onClick={() => {
+                closeMenu();
+                setShowContacts(true);
+              }}
+              className='flex items-center cursor-pointer gap-2 text-gray-700 dark:text-gray-100'
+            >
+              <Phone className='w-5 h-5' />
+              Contacts
+            </button>
             <div className='flex items-center gap-2'>
               <SunMoon className='w-5 h-5' />
               <ModeToggle />
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Contacts */}
+      {showContacts && (
+        <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center'>
+          <div
+            ref={contactsRef}
+            className='bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl w-[90%] max-w-md text-gray-800 dark:text-gray-100'
+          >
+            <h2 className='text-xl font-semibold mb-4 text-center'>
+              Contact Us
+            </h2>
+            <ul className='space-y-3'>
+              <li className='flex items-center gap-3'>
+                <FaInstagram className='text-pink-600 w-5 h-5' />
+                <a
+                  href='https://instagram.com/mastery_it_'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:underline'
+                >
+                  Instagram
+                </a>
+              </li>
+              <li className='flex items-center gap-3'>
+                <FaTiktok className='text-black dark:text-white w-5 h-5' />
+                <a
+                  href='https://tiktok.com/@mastery_it_'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:underline'
+                >
+                  TikTok
+                </a>
+              </li>
+              <li className='flex items-center gap-3'>
+                <FaYoutube className='text-red-600 w-5 h-5' />
+                <a
+                  href='https://youtube.com/@masteryit-b1h?si=moXW_iHIMK0WzLJw'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:underline'
+                >
+                  YouTube
+                </a>
+              </li>
+              <li className='flex items-center gap-3'>
+                <FaLinkedin className='text-blue-700 w-5 h-5' />
+                <a
+                  href='https://linkedin.com/groups/13164163'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:underline'
+                >
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       )}
