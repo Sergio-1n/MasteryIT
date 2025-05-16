@@ -282,7 +282,7 @@ export default function Header() {
               <li className='flex items-center gap-3'>
                 <FaEnvelope className='text-white w-5 h-5' />
                 <a
-                  href='skuznetcov150@gmail.com'
+                  href='mailto:skuznetcov150@gmail.com'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='hover:underline'
