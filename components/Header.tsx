@@ -22,7 +22,13 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs';
-import { FaInstagram, FaLinkedin, FaTiktok, FaYoutube } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaInstagram,
+  FaLinkedin,
+  FaTiktok,
+  FaYoutube,
+} from 'react-icons/fa';
 
 export default function Header() {
   const router = useRouter();
@@ -272,7 +278,18 @@ export default function Header() {
             <h2 className='text-xl font-semibold mb-4 text-center'>
               Contact Us
             </h2>
-            <ul className='space-y-3'>
+            <ul className='sm:space-y-5 space-y-7'>
+              <li className='flex items-center gap-3'>
+                <FaEnvelope className='text-white w-5 h-5' />
+                <a
+                  href='skuznetcov150@gmail.com'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:underline'
+                >
+                  Gmail
+                </a>
+              </li>
               <li className='flex items-center gap-3'>
                 <FaInstagram className='text-pink-600 w-5 h-5' />
                 <a
