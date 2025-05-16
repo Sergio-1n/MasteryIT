@@ -208,10 +208,7 @@ export default function TableOfContentsPage() {
             </ul>
           </div>
           <SignedIn>
-            <Link
-              className='inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'
-              href='/book/introduction'
-            >
+            <Link className='cta-button' href='/book/introduction'>
               Start Reading
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -232,7 +229,7 @@ export default function TableOfContentsPage() {
 
           <SignedOut>
             <SignInButton mode='redirect' forceRedirectUrl='/book/introduction'>
-              <button className='inline-flex cursor-pointer items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition'>
+              <button className='cta-button'>
                 Start Reading
                 <svg
                   xmlns='http://www.w3.org/2000/svg'

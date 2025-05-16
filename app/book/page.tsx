@@ -111,7 +111,7 @@ export default function BookHomePage() {
 
           <h2>Who Is This Book For?</h2>
 
-          <ul>
+          <ul className='list-disc'>
             <li>A beginner eager to explore the opportunities in IT,</li>
             <li>
               A programmer, web designer, tester, or analyst deepening your
