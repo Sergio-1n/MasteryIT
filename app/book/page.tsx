@@ -6,9 +6,9 @@ import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 
 export default function BookHomePage() {
   return (
-    <div className='max-w-4xl w-full space-y-4'>
-      <main className='max-w-3xl sm:pt-16 py-4 dark:text-gray-100 md:pt-16 mx-auto px-6 pb-16 space-y-8 text-gray-800'>
-        <div className='bg-white/80 text-left md:text-xl dark:bg-black/60 backdrop-blur shadow-xl rounded-2xl p-6'>
+    <main className='sm:py-16 md:py-16 px-4 py-4 pb-18 flex flex-col items-center transition-all'>
+      <div className='max-w-4xl w-full space-y-4'>
+        <div className='bg-white text-left md:text-xl dark:bg-black/60 backdrop-blur shadow-xl rounded-2xl p-6'>
           <h1>
             &quot;The Future of IT: Transforming Knowledge into Career
             Success&quot;
@@ -224,7 +224,7 @@ export default function BookHomePage() {
             </SignInButton>
           </SignedOut>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
