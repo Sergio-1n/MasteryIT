@@ -139,6 +139,9 @@ export default function TableOfContentsPage() {
               <li>6.3 MVP & Metrics</li>
               <li>6.4 Project Life Cycle</li>
               <li>6.5 Agile Sprints</li>
+              <li>6.6 Agile Sprints: The Engine of Agile Project Management</li>
+              <li>6.7 Understanding Kanban in Agile Methodology</li>
+              <li>6.8 Waterfall Methodology</li>
             </ul>
           </div>
 
